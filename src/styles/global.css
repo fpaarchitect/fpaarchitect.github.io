@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+	--font-sans: "Open Sans Variable", "sans-serif";
+	--font-heading: "Outfit Variable", "sans-serif";
+}
