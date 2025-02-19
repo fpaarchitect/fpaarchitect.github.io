@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="About">
+	<section
+		class="mx-auto grid max-w-screen-xl gap-4 px-4 py-32 sm:grid-cols-[1fr_2fr]"
+	>
+		<Image
+			class="h-[360px] object-cover sm:h-[480px]"
+			src={import("/src/assets/olga.jpg")}
+			alt="Olga Podushkina"
+		/>
+
+		<div>
+			<header>
+				<h1 class="mb-8 font-heading text-4xl">Olga Podushkina</h1>
+			</header>
+
+			<div class="flex flex-col gap-4">
+				<p>
+					Owner and leading project architect of the architectural studio
+					FPA-architect.
+				</p>
+				<p>
+					Vice president of NSAU, chair of the Commission on Copyright and
+					Professional Ethics of NSAU; member of the Commission on Professional
+					Practice of the International Union of Architects; graduated from the
+					Faculty of Architecture of the Dnipro State Academy of Civil
+					Engineering and Architecture; gained professional experience at Dolnik
+					& Co., and since 2014 has run her own studio FPA-architect.
+				</p>
+				<p>
+					Completed over 100 projects in Ukraine and one in Kazakhstan; since
+					2021, expert-consultant in two companies; participant in the work on
+					the Urban Planning Code of Ukraine; resident of Dnipro, participating
+					in international programs related to architecture (including
+					UREHERIT).
+				</p>
+			</div>
+		</div>
+	</section>
+</Layout>
