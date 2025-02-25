@@ -4,3 +4,7 @@
 	--font-sans: "Open Sans Variable", "sans-serif";
 	--font-heading: "Outfit Variable", "sans-serif";
 }
+
+.text-shadow {
+	text-shadow: 2px 2px 10px black;
+}

@@ -4,13 +4,60 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Home">
+	<header
+		class="relative h-[80vh] lg:h-[60vh] [@media(max-height:800px)]:h-[80vh]"
+	>
+		<div class="absolute top-0 left-0 flex h-full w-full justify-center">
+			<div
+				class="grid max-w-5xl grid-rows-[1fr_4fr_1fr] items-center justify-items-center px-4"
+			>
+				<div class="relative row-start-2 bg-black p-8">
+					<p
+						class="mb-8 font-heading text-2xl/normal italic lg:text-3xl/normal"
+					>
+						The highest goal of the architect and urban planner is to help the
+						city to be itself, harmoniously designing new objects in accordance
+						with the existing environment, technological progress and human
+						needs.
+					</p>
+					<p class="lg:text-xl">Olga Podushkina - FPA Architect</p>
+					<div
+						class="absolute top-0 left-[calc(100%-150px)] -z-10 hidden h-full w-[200px] skew-x-[-20deg] bg-black lg:block"
+					>
+					</div>
+					<div
+						class="absolute top-0 left-[calc(-50px)] -z-10 hidden h-full w-[200px] skew-x-[-20deg] bg-black lg:block"
+					>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<figure class="relative -z-20 h-full w-full">
+			<video
+				class="h-full w-full object-cover mix-blend-multiply blur-xs"
+				width=""
+				height=""
+				autoplay
+				disablepictureinpicture
+				disableRemotePlayback
+				loop
+				muted
+				playsinline
+				poster="hero.png"
+			>
+				<source src="hero_slow_4x.mp4" type="video/mp4" />
+			</video>
+		</figure>
+	</header>
+
 	<section
 		class="mx-auto grid max-w-screen-xl gap-8 px-4 py-32 sm:grid-cols-[1fr_2fr] sm:gap-4"
 	>
 		<div>
 			<Image
 				class="mb-4 h-[360px] object-cover sm:h-[480px]"
-				src={import("/src/assets/olga.jpg")}
+				src={import("/src/assets/olga_bg_white.jpg")}
 				alt="Olga Podushkina"
 			/>
 			<p>Architect: Olga Podushkina</p>
