@@ -1,0 +1,14 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+
+interface Props {
+	project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+
+const { Content } = await render(project);
+---
+
+<Content />

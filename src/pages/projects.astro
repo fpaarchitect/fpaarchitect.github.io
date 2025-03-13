@@ -1,0 +1,126 @@
+---
+import Project from "../components/Project.astro";
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const currentProjects = await getCollection("projects", ({ data }) => {
+	return data.endDate === undefined;
+});
+const sortedCurrentProjects = currentProjects.sort(
+	// Latest.
+	({ data: a }, { data: b }) => b.startDate.getTime() - a.startDate.getTime(),
+);
+
+const completedProjects = await getCollection("projects", ({ data }) => {
+	return data.endDate !== undefined;
+});
+
+const projects = sortedCurrentProjects.concat(completedProjects);
+---
+
+<script>
+	class ProjectList extends HTMLElement {
+		constructor() {
+			super();
+
+			const projects = this.querySelectorAll(".project");
+			const buttons = this.querySelectorAll("button");
+
+			buttons.forEach((button, i) => {
+				button.addEventListener("click", () => {
+					setActiveProject(i);
+				});
+			});
+
+			function setActiveProject(index: number) {
+				projects.forEach((project, j) => {
+					if (index === j) {
+						project.classList.remove("hidden");
+					} else {
+						project.classList.add("hidden");
+					}
+				});
+
+				buttons.forEach((button, j) => {
+					if (index === j) {
+						button.parentElement?.classList.add("list-disc");
+					} else {
+						button.parentElement?.classList.remove("list-disc");
+					}
+				});
+			}
+		}
+	}
+
+	customElements.define("project-list", ProjectList);
+</script>
+
+<Layout title="Projects">
+	<project-list>
+		<section
+			class="mx-auto grid max-w-screen-xl items-baseline gap-4 px-4 py-32 sm:grid-cols-[1fr_3fr]"
+		>
+			<div>
+				<div class="mb-20">
+					<div class="border-b-2">
+						<p class="">Current Projects</p>
+					</div>
+					<div
+						class="border-r-2 pt-2 [border-image:linear-gradient(to_bottom,#fff,#00000000)_1_100%]"
+					>
+						<ul class="px-6 py-2">
+							{
+								sortedCurrentProjects.map((project, i) => (
+									<li class:list={i === 0 ? "list-disc" : ""}>
+										<button class="cursor-pointer hover:underline">
+											{project.data.title}
+										</button>
+									</li>
+								))
+							}
+						</ul>
+					</div>
+				</div>
+
+				<div>
+					<div class="border-b-2">
+						<p class="">Completed Projects</p>
+					</div>
+					<div
+						class="border-r-2 [border-image:linear-gradient(to_bottom,#fff,#00000000)_1_100%]"
+					>
+						<ul class="px-6 py-2">
+							{
+								completedProjects.map((project) => (
+									<li>
+										<button class="cursor-pointer hover:underline">
+											{project.data.title}
+										</button>
+									</li>
+								))
+							}
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				{
+					projects.map((project, i) => (
+						<div class:list={i === 0 ? "" : "hidden"} class="project">
+							<header class="border-b-2">
+								<h1 class="text-center font-heading text-4xl">
+									{project.data.title}
+								</h1>
+							</header>
+
+							<div class="p-4">
+								<Project project={project} />
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</section>
+	</project-list>
+</Layout>
