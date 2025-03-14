@@ -15,6 +15,11 @@ const { Content } = await render(post);
 ---
 
 <Layout title={post.data.title}>
-	<h1>{post.data.title}</h1>
-	<Content />
+	<section class="mx-auto max-w-screen-xl gap-4 px-4 py-32 lg:text-xl">
+		<header>
+			<h1 class="mb-8 font-heading text-4xl">{post.data.title}</h1>
+		</header>
+
+		<Content />
+	</section>
 </Layout>
