@@ -1,25 +1,25 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getCollection, render } from "astro:content";
+import Project from "../../components/Project.astro";
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
 	const projects = await getCollection("projects");
 	return projects.map((project) => ({
 		params: { id: project.id },
-		props: { post: project },
+		props: { project: project },
 	}));
 }
 
-const { post } = Astro.props;
-const { Content } = await render(post);
+const { project } = Astro.props;
 ---
 
-<Layout title={post.data.title}>
+<Layout title={project.data.title}>
 	<section class="mx-auto max-w-screen-xl gap-4 px-4 py-32 lg:text-xl">
 		<header>
-			<h1 class="mb-8 font-heading text-4xl">{post.data.title}</h1>
+			<h1 class="mb-8 font-heading text-4xl">{project.data.title}</h1>
 		</header>
 
-		<Content />
+		<Project project={project} />
 	</section>
 </Layout>
