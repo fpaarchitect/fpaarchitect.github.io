@@ -33,11 +33,10 @@ function getProjectsMap(projects: CollectionEntry<"projects">[]) {
 const currentProjectsMap = getProjectsMap(currentProjects);
 const completedProjectsMap = getProjectsMap(completedProjects);
 
-const projects = currentProjectsMap
-	.values()
-	.toArray()
-	.flat()
-	.concat(completedProjectsMap.values().toArray().flat());
+const projects = [
+	...currentProjectsMap.values(),
+	...completedProjectsMap.values(),
+].flat();
 ---
 
 <script>
