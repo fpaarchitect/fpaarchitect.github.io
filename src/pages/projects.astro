@@ -104,7 +104,7 @@ const projects = [
 						class="max-h-[448px] overflow-y-scroll border-r-2 [border-image:linear-gradient(to_bottom,#fff,#00000000)_1_100%]"
 					>
 						{
-							completedProjectsMap.entries().map(([year, projects]) => (
+							[...completedProjectsMap.entries()].map(([year, projects]) => (
 								<div class="py-8">
 									<p class="">{year}</p>
 									<ul class="grid gap-4">
