@@ -55,19 +55,11 @@ const projects = [
 
 			function setActiveProject(index: number) {
 				projects.forEach((project, j) => {
-					if (index === j) {
-						project.classList.remove("hidden");
-					} else {
-						project.classList.add("hidden");
-					}
+					project.classList.toggle("hidden", j !== index);
 				});
 
 				buttons.forEach((button, j) => {
-					if (index === j) {
-						button.classList.add("underline");
-					} else {
-						button.classList.remove("underline");
-					}
+					button.classList.toggle("underline", j === index);
 				});
 			}
 
@@ -125,7 +117,7 @@ const projects = [
 
 			<div>
 				{
-					projects.map((project, i) => (
+					projects.map((project) => (
 						<div class="project">
 							<header class="border-b-2">
 								<h1 class="text-center font-heading text-4xl">
