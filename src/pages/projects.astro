@@ -33,9 +33,11 @@ function getProjectsMap(projects: CollectionEntry<"projects">[]) {
 const currentProjectsMap = getProjectsMap(currentProjects);
 const completedProjectsMap = getProjectsMap(completedProjects);
 
-const projects = [...currentProjectsMap.values()]
+const projects = currentProjectsMap
+	.values()
+	.toArray()
 	.flat()
-	.concat([...completedProjects.values()].flat());
+	.concat(completedProjectsMap.values().toArray().flat());
 ---
 
 <script>
@@ -63,10 +65,8 @@ const projects = [...currentProjectsMap.values()]
 
 				buttons.forEach((button, j) => {
 					if (index === j) {
-						//button.parentElement?.classList.add("list-disc");
 						button.classList.add("underline");
 					} else {
-						//button.parentElement?.classList.remove("list-disc");
 						button.classList.remove("underline");
 					}
 				});
@@ -92,24 +92,8 @@ const projects = [...currentProjectsMap.values()]
 						<p class="text-center">Current Projects</p>
 					</div>
 					<div
-						class="border-r-2 [border-image:linear-gradient(to_bottom,#fff,#00000000)_1_100%]"
+						class="max-h-[448px] overflow-y-scroll border-r-2 [border-image:linear-gradient(to_bottom,#fff,#00000000)_1_100%]"
 					>
-						{
-							currentProjectsMap.entries().map(([year, projects]) => (
-								<div>
-									<p>{year}</p>
-									<ul class="px-6 py-2">
-										{projects.map((project, i) => (
-											<li>
-												<button class="cursor-pointer hover:underline">
-													{project.data.title}
-												</button>
-											</li>
-										))}
-									</ul>
-								</div>
-							))
-						}
 					</div>
 				</div>
 
@@ -126,7 +110,7 @@ const projects = [...currentProjectsMap.values()]
 									<p class="">{year}</p>
 									<ul class="grid gap-4">
 										{projects.map((project) => (
-											<li class="pl-4">
+											<li class="px-4">
 												<button class="cursor-pointer text-start hover:underline">
 													{project.data.title}
 												</button>
